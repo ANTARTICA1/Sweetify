@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="Sweetify" />
+    <title>Sweetify</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="assets/images/spotify.png" type="image/png" />
+  </head>
+  <body>
+    <div class="splash-screen" id="splash-screen">
+      <div class="splash-logo">
+        <img src="assets/images/spotify.png" alt="Spotify" class="spotify-logo-img" />
+      </div>
+      <div class="splash-loading">
+        <div class="loading-dots"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+
+    <div class="app-wrapper" id="app-wrapper">
+      <div class="screen home-screen active" id="home-screen">
+        <div class="status-bar">
+          <span class="status-time" id="status-time">22:45</span>
+          <div class="status-icons">
+            <i class="bi bi-reception-4"></i>
+            <i class="bi bi-wifi"></i>
+            <i class="bi bi-battery-full"></i>
+          </div>
+        </div>
+
+        <div class="home-scroll" id="home-scroll">
+          <div class="home-header">
+            <div class="home-avatar">K</div>
+            <h1 class="home-greeting" id="home-greeting">Good evening</h1>
+            <div class="home-header-icons">
+              <i class="bi bi-bell"></i>
+              <i class="bi bi-clock-history"></i>
+              <i class="bi bi-gear"></i>
+            </div>
+          </div>
+
+          <div class="filter-chips">
+            <button class="chip active">All</button>
+            <button class="chip">Music</button>
+            <button class="chip">Podcasts</button>
+            <button class="chip">Wrapped</button>
+          </div>
+
+          <div class="quick-grid" id="quick-grid"></div>
+
+          <div class="section" id="section-recently">
+            <h2 class="section-title">Recently played</h2>
+            <div class="horizontal-scroll" id="recent-scroll"></div>
+          </div>
+
+          <div class="section" id="section-for-you">
+            <h2 class="section-title">Made for you</h2>
+            <div class="horizontal-scroll" id="foryou-scroll"></div>
+          </div>
+
+          <div class="section" id="section-popular">
+            <h2 class="section-title">Popular playlists</h2>
+            <div class="horizontal-scroll" id="popular-scroll"></div>
+          </div>
+
+          <div style="height: 140px"></div>
+        </div>
+
+        <div class="mini-player" id="mini-player" style="display: none" onclick="openNowPlaying()">
+          <div class="mini-player-inner">
+            <img class="mini-thumb" id="mini-thumb" src="assets/images/romantic_album.png" alt="" />
+            <div class="mini-info">
+              <span class="mini-title" id="mini-title">Stuck With You</span>
+              <span class="mini-artist" id="mini-artist">Ariana Grande, Justin Bieber</span>
+            </div>
+            <div class="mini-controls">
+              <i class="bi bi-speaker"></i>
+              <i
+                class="bi bi-pause-fill"
+                id="mini-play-icon"
+                onclick="
+                  event.stopPropagation();
+                  toggleMiniPlay();
+                "
+              ></i>
+            </div>
+          </div>
+          <div class="mini-progress">
+            <div class="mini-progress-fill" id="mini-progress-fill"></div>
+          </div>
+        </div>
+
+        <nav class="bottom-nav">
+          <div class="nav-tab active">
+            <i class="bi bi-house-fill"></i>
+            <span>Home</span>
+          </div>
+          <div class="nav-tab">
+            <i class="bi bi-search"></i>
+            <span>Search</span>
+          </div>
+          <div class="nav-tab">
+            <i class="bi bi-collection"></i>
+            <span>Your Library</span>
+          </div>
+        </nav>
+      </div>
+      <div class="screen now-playing-screen" id="now-playing-screen">
+        <div class="np-bg-gradient" id="np-bg-gradient"></div>
+        <div class="np-scroll" id="np-scroll">
+          <div class="np-topbar">
+            <button class="np-back" onclick="closeNowPlaying()">
+              <i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="np-source-info">
+              <span class="np-from">PLAYING FROM PLAYLIST</span>
+              <span class="np-playlist-name">For You 💕</span>
+            </div>
+            <button class="np-menu">
+              <i class="bi bi-three-dots-vertical"></i>
+            </button>
+          </div>
+
+          <div class="np-art-container">
+            <img class="np-album-art" id="np-art" src="assets/images/romantic_album.png" alt="Album" />
+          </div>
+
+          <div class="np-song-info">
+            <div class="np-song-text">
+              <h2 class="np-title" id="np-title">Stuck With You</h2>
+              <p class="np-artist" id="np-artist">Ariana Grande, Justin Bieber</p>
+            </div>
+            <button class="np-heart" id="np-heart" onclick="toggleHeart()">
+              <i class="bi bi-heart"></i>
+            </button>
+          </div>
+
+          <div class="np-progress">
+            <div class="np-progress-track" id="np-progress-track" onclick="seekNp(event)">
+              <div class="np-progress-fill" id="np-progress-fill">
+                <div class="np-progress-dot"></div>
+              </div>
+            </div>
+            <div class="np-times">
+              <span id="np-time-now">0:00</span>
+              <span id="np-time-total">3:47</span>
+            </div>
+          </div>
+
+          <div class="np-controls">
+            <button class="np-ctrl-btn" id="np-shuffle"><i class="bi bi-shuffle"></i></button>
+            <button class="np-ctrl-btn np-prev" onclick="prevTrackNp()"><i class="bi bi-skip-start-fill"></i></button>
+            <button class="np-play-btn" id="np-play-btn" onclick="togglePlayNp()">
+              <i class="bi bi-pause-fill" id="np-play-icon"></i>
+            </button>
+            <button class="np-ctrl-btn np-next" onclick="nextTrackNp()"><i class="bi bi-skip-end-fill"></i></button>
+            <button class="np-ctrl-btn" id="np-repeat"><i class="bi bi-repeat"></i></button>
+          </div>
+
+          <div class="np-extras">
+            <button class="np-extra-btn"><i class="bi bi-speaker"></i></button>
+            <button class="np-extra-btn"><i class="bi bi-share"></i></button>
+          </div>
+
+          <div class="np-lyrics-section collapsed" id="np-lyrics-section" onclick="toggleLyricsExpand()">
+            <div class="lyrics-header">
+              <h3>Lyrics</h3>
+            </div>
+            <div class="lyrics-body" id="lyrics-body"></div>
+            <div class="lyrics-gradient"></div>
+            <button class="lyrics-toggle-btn" id="lyrics-toggle-btn">
+              <i class="bi bi-chevron-down"></i>
+            </button>
+          </div>
+
+          <div class="np-about-section">
+            <div class="about-header-img">
+              <img src="assets/images/artist_avatar.png" alt="Artist" />
+              <div class="about-overlay">
+                <h3>About the artist</h3>
+                <p class="about-name">For You ❤️</p>
+              </div>
+            </div>
+            <div class="about-body">
+              <p class="about-desc">Halaman ini dibuat khusus untuk seseorang yang sangat spesial.</p>
+              <div class="about-stats">
+                <span>1 monthly listener: <strong>Kamu</strong> </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="np-credits-section">
+            <h3>Credits</h3>
+            <div class="credit-item">
+              <span class="credit-role">Written by</span>
+              <span class="credit-name">Someone who loves you 💕</span>
+            </div>
+            <div class="credit-item">
+              <span class="credit-role">Produced by</span>
+              <span class="credit-name">Love & Destiny</span>
+            </div>
+          </div>
+
+          <div style="height: 60px"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup-overlay" id="popup-overlay" onclick="closePopup()">
+      <div class="popup-modal" onclick="event.stopPropagation()">
+        <div class="popup-emoji">💕</div>
+        <h3 class="popup-title">Bukan yang ini...</h3>
+        <p class="popup-text">Coba cari lagu yang spesial buat kamu</p>
+        <button class="popup-btn" onclick="closePopup()">Okeyy, aku cari lagi!</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
