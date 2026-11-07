@@ -6,6 +6,11 @@ Sweetify is a front-end web application inspired by modern mobile music streamin
 
 The application replicates the mobile streaming interface within a standalone web viewport. It includes an authentic loading splash screen, mobile status bar, playback scrubber, album artwork display, and a dedicated full-screen synchronized lyrics engine that highlights lines in real time corresponding to audio track timestamps.
 
+
+## Interface Preview
+
+[![Interface Preview Status](https://img.shields.io/badge/Interface_Preview-Documentation_in_Progress-1db954?style=for-the-badge&logo=spotify&logoColor=white)](https://github.com/ANTARTICA1/Sweetify)
+
 ## Features
 
 - Real-Time Synchronized Lyrics: Dynamically tracks `audio.currentTime` and applies active styling and auto-scroll to matching lyric nodes based on millisecond timestamps.
